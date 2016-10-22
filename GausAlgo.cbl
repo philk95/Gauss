@@ -1,5 +1,5 @@
       ******************************************************************
-      * Author:
+      * Author: Björn Lüpschen und Philipp Kohl
       * Date:
       * Purpose:
       * Tectonics: cobc

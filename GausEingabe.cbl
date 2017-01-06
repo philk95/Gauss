@@ -9,49 +9,67 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT Tabelle ASSIGN TO 'eingabe.txt'
-           ORGANIZATION IS line SEQUENTIAL.
+           SELECT FD-MATRIX ASSIGN TO 'eingabe.txt'
+           ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
        FILE SECTION.
-            FD TABELLE.
+            FD FD-MATRIX.
+               01 D-N               PIC 999.
                01 D-MATRIX-ROW.
-                  05 D-MATRIX-VALUE PIC +999.99 OCCURS 100
-                     INDEXED BY D.
+                  05 D-MATRIX-VALUE PIC +999.99 OCCURS 4.
 
        WORKING-STORAGE SECTION.
            01 EINGABE-DATEI-EOF PIC X.
            01 E-MATRIX.
-              05 E-MATRIX-ROW OCCURS 100 INDEXED BY R.
-                 10 E-MATRIX-CLM OCCURS 100 INDEXED BY E.
-                    15 E-MATRIX-VALUE PIC S999V99.
+              05 E-MATRIX-ROW OCCURS 100.
+                 10 E-MATRIX-CLM OCCURS 100.
+                    15 E-MATRIX-VALUE PIC -ZZ9.99.
+
+           01 R-MATRIX.
+              05 R-MATRIX-ROW OCCURS 100.
+                 10 R-MATRIX-CLM OCCURS 100.
+                    15 R-MATRIX-VALUE PIC S999V9(10) COMP-3.
+
            01 MAX-ROWS PIC 99 COMP-3 VALUE ZERO.
+           01 ROW PIC 99 COMP-3.
+           01 CLM PIC 99 COMP-3.
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
                PERFORM Vorlauf
                PERFORM Hauptlauf
                PERFORM NACHLAUF
+
                DISPLAY 'E-Matrix: '
-               PERFORM VARYING R FROM 1 BY 1 UNTIL R > MAX-ROWS
-                   DISPLAY E-MATRIX-ROW(R)
+               PERFORM VARYING ROW FROM 1 BY 1 UNTIL ROW > MAX-ROWS
+                   DISPLAY E-MATRIX-ROW(ROW)
+               END-PERFORM
+
+               PERFORM VARYING ROW
+                       FROM 1 BY 1 UNTIL ROW > MAX-ROWS
+                       AFTER CLM FROM 1 BY 1 UNTIL CLM > MAX-ROWS + 1
+                       MOVE E-MATRIX-VALUE(ROW,CLM) TO
+                       R-MATRIX-VALUE(ROW, CLM)
                END-PERFORM
 
                CALL "GAUSALGO"
-                   USING E-MATRIX, MAX-ROWS
+                   USING R-MATRIX, MAX-ROWS
                STOP RUN.
        Vorlauf.
-           OPEN INPUT TABELLE
+           OPEN INPUT FD-MATRIX
            MOVE SPACES TO EINGABE-DATEI-EOF
+           READ FD-MATRIX INTO D-N
+           DISPLAY 'N ist: ' D-N
            PERFORM EINZELVERARBEITUNG.
        Hauptlauf.
                PERFORM Einzelverarbeitung until EINGABE-DATEI-EOF ="C".
 
        NACHLAUF.
-               CLOSE Tabelle.
+               CLOSE FD-MATRIX.
 
        EINZELVERARBEITUNG.
-           READ TABELLE INTO D-MATRIX-ROW
+           READ FD-MATRIX INTO D-MATRIX-ROW
                AT END MOVE "C" TO EINGABE-DATEI-EOF
            END-READ
            IF EINGABE-DATEI-EOF NOT EQUAL "C"

@@ -30,9 +30,7 @@
                     15 E-MATRIX-VALUE PIC -ZZ9.99.
 
            01 R-MATRIX.
-              05 R-MATRIX-ROW OCCURS 100.
-                 10 R-MATRIX-CLM OCCURS 100.
-                    15 R-MATRIX-VALUE PIC S999V9(10) COMP-3.
+              COPY "MATRIX.CPY" REPLACING ==#== BY ==R==.
 
            01 MAX-ROWS PIC 99 COMP-3 VALUE ZERO.
            01 ROW PIC 99 COMP-3.

@@ -17,13 +17,16 @@
             FD FD-MATRIX.
                01 D-N               PIC 999.
                01 D-MATRIX-ROW.
-                  05 D-MATRIX-VALUE PIC +999.99 OCCURS 4.
+                  05 D-MATRIX-VALUE PIC +999.99
+                     OCCURS 1 TO 100 DEPENDING ON NUMBER-OF-COLUMNS.
 
        WORKING-STORAGE SECTION.
            01 EINGABE-DATEI-EOF PIC X.
+           01 NUMBER-OF-COLUMNS   PIC 99 COMP-3.
+
            01 E-MATRIX.
               05 E-MATRIX-ROW OCCURS 100.
-                 10 E-MATRIX-CLM OCCURS 100.
+                 10 E-MATRIX-CLM OCCURS 100 TIMES.
                     15 E-MATRIX-VALUE PIC -ZZ9.99.
 
            01 R-MATRIX.
@@ -34,6 +37,7 @@
            01 MAX-ROWS PIC 99 COMP-3 VALUE ZERO.
            01 ROW PIC 99 COMP-3.
            01 CLM PIC 99 COMP-3.
+
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
@@ -59,8 +63,10 @@
        Vorlauf.
            OPEN INPUT FD-MATRIX
            MOVE SPACES TO EINGABE-DATEI-EOF
+
            READ FD-MATRIX INTO D-N
-           DISPLAY 'N ist: ' D-N
+           MOVE D-N TO NUMBER-OF-COLUMNS
+
            PERFORM EINZELVERARBEITUNG.
        Hauptlauf.
                PERFORM Einzelverarbeitung until EINGABE-DATEI-EOF ="C".

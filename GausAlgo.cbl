@@ -104,6 +104,10 @@
             PERFORM PRINT
 
             PERFORM INTERPRET-RESULT
+
+            CALL "GAUSAUSGABE"
+                       USING R-MATRIX, MAX-ROWS,MAX-COLS
+
             EXIT PROGRAM.
 
        INTERPRET-RESULT.

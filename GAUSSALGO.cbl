@@ -5,18 +5,17 @@
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. GAUSALGO.
+       PROGRAM-ID. GAUSSALGO.
        DATA DIVISION.
        FILE SECTION.
        WORKING-STORAGE SECTION.
 
-           01 MAX-COLS   PIC 99 COMP-3.
-
+           01 MAX-COLS                         PIC 99 COMP-3.
            01 A-MATRIX.
-               05 A-MATRIX-ROW OCCURS 4 INDEXED BY AR.
-                  10 A-MATRIX-COL OCCURS 4 INDEXED BY AC.
-                       15 A-MATRIX-VALUE PIC -ZZ9.9999.
-                       15 FILLER         PIC XX VALUE ' '.
+               05 A-MATRIX-ROW OCCURS 100 INDEXED BY AR.
+                  10 A-MATRIX-COL OCCURS 100 INDEXED BY AC.
+                       15 A-MATRIX-VALUE       PIC -ZZ9.9999.
+                       15 FILLER               PIC XX VALUE ' '.
 
 
            01 R-MATRIX.
@@ -52,6 +51,10 @@
                88 DEBUG-ON     VALUE 0.
                88 DEBUG-OFF    VALUE 1.
 
+           77 RESULT-TYPE     PIC 9.
+               88 UNIQUE       VALUE 0.
+               88 NOT-SOLVABLE VALUE 1.
+
        LINKAGE SECTION.
            01 MATRIX.
               COPY "MATRIX.CPY" REPLACING ==#== BY ==E==.
@@ -72,8 +75,8 @@
                     FROM 1 BY 1
                     UNTIL I-COLUMN > MAX-COLS - 1
                     PERFORM FIND-MAX-ELEMENT-IN-COLUMN
-                    MOVE TEMP-MAX TO PRINT-VALUE
 
+                    MOVE TEMP-MAX TO PRINT-VALUE
                     IF DEBUG-ON
                     DISPLAY 'Maximun in Spalte ' I-COLUMN
                     ' betreagt ' PRINT-VALUE
@@ -104,6 +107,15 @@
             PERFORM PRINT
 
             PERFORM INTERPRET-RESULT
+
+            EVALUATE TRUE
+               WHEN UNIQUE
+                   DISPLAY
+                   'TODO: Call an Ausgabe..Bjoern muss hinne machen'
+               WHEN NOT-SOLVABLE
+                   DISPLAY 'Nicht (eindeutig) loesbar!'
+            END-EVALUATE
+
             EXIT PROGRAM.
 
        INTERPRET-RESULT.
@@ -115,6 +127,9 @@
                    END-IF
            END-PERFORM
 
+           IF VALUE-NOT-ZERO-COUNTER > 1
+               SET NOT-SOLVABLE TO TRUE
+           END-IF
 
        .
        DIVIDE-ROWS.

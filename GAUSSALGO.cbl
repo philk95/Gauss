@@ -66,7 +66,7 @@
            COMPUTE MAX-COLS = MAX-ROWS + 1
            MOVE MATRIX TO R-MATRIX
 
-           SET DEBUG-ON TO TRUE
+           SET DEBUG-OFF TO TRUE
 
            DISPLAY 'Ausgangs Matrix: '
            PERFORM PRINT
@@ -110,11 +110,12 @@
 
             EVALUATE TRUE
                WHEN UNIQUE
-                   DISPLAY
-                   'TODO: Call an Ausgabe..Bjoern muss hinne machen'
+                   CALL "GAUSSAUSGABE"
+                       USING R-MATRIX, MAX-COLS
                WHEN NOT-SOLVABLE
                    DISPLAY 'Nicht (eindeutig) loesbar!'
             END-EVALUATE
+
 
             EXIT PROGRAM.
 

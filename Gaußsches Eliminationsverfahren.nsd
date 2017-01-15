@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root text="&#34;Gaußsches Eliminationsverfahren&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;EPSILON := 0,00000001&#34;" comment="" color="ffffff" rotated="0"></instruction>
+		<while text="&#34;zähle Spaltenindex von 1 bis (Anzahl Spalten-1), Schrittweite 1&#34;" comment="" color="ffffff">
+			<qWhile>
+				<call text="&#34;PivotZeile:= Suche Maximum in Spaltenindex-zeile&#34;" comment="" color="ffffff"></call>
+				<instruction text="&#34;Tausche Spaltenindex-zeile mit PivotZeile&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<while text="&#34;zähle Zeilenindex von 1 bis (Anzahl Zeilen), Schrittweite 1&#34;" comment="" color="ffffff">
+					<qWhile>
+						<alternative text="&#34;Wenn Zeilenindex != Spaltenindex&#34;" comment="" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;Vorfaktor := (MatrixElement von Zeilenindex und Spaltenindex)/ (MatrixElement von Spaltenindex und Spaltenindex)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+								<while text="&#34;zähle TempSpaltenindex von 1 bis (Anzahl Spalten), Schrittweite 1&#34;" comment="" color="ffffff">
+									<qWhile>
+										<instruction text="&#34;MatrixElement von (Zeilenindex und TempSpaltenindex)= MatrixElement von (Zeilenindex und TempSpaltenindex)-Vorfaktor * MatrixElement von (Pivotzeile und TempSpaltenindex)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+										<alternative text="&#34;|MatrixElement von (Zeilenindex und TempSpaltenindex)| &#60; EPSILON &#34;" comment="" color="ffffff">
+											<qTrue>
+												<instruction text="&#34;MatrixElement von (Zeilenindex und TempSpaltenindex) = 0&#34;" comment="" color="ffffff" rotated="0"></instruction>
+											</qTrue>
+											<qFalse>
+											</qFalse>
+										</alternative>
+									</qWhile>
+								</while>
+							</qTrue>
+							<qFalse>
+							</qFalse>
+						</alternative>
+					</qWhile>
+				</while>
+			</qWhile>
+		</while>
+		<while text="&#34;zähle Zeilenindex index von (Anzahl Zeilen) bis 1, Schrittweite -1&#34;" comment="&#34;&#34;" color="ffffff">
+			<qWhile>
+				<while text="&#34;zähle Spaltenindex von (Anzahl Spalten) bis 1, Schrittweite -1&#34;" comment="" color="ffffff">
+					<qWhile>
+						<instruction text="&#34;MatrixElement von (Zeilenindex und Spaltenindex)= MatrixElement von (Zeilenindex und Spaltenindex) / MatrixElement von (Zeilenindex und Zeilenindex)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+						<alternative text="&#34;|MatrixElement von (Zeilenindex und Spaltenindex)| &#60; EPSILON &#34;" comment="" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;MatrixElement von (Zeilenindex und TempSpaltenindex) = 0&#34;" comment="" color="ffffff" rotated="0"></instruction>
+							</qTrue>
+							<qFalse>
+							</qFalse>
+						</alternative>
+					</qWhile>
+				</while>
+			</qWhile>
+		</while>
+	</children>
+</root>

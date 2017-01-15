@@ -7,19 +7,25 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSAUSGABE.
        ENVIRONMENT DIVISION.
+
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT MATRIX-ROW ASSIGN TO "ausgabe.txt"
-           ORGANIZATION IS SEQUENTIAL.
+           ORGANIZATION IS LINE SEQUENTIAL
+           ACCESS IS SEQUENTIAL.
 
        DATA DIVISION.
 
        FILE SECTION.
            FD MATRIX-ROW.
            01 MATRIX.
+               05 FILL         PIC XX VALUE X'0D0A'.
                05 D-MATRIX-ROW
-               OCCURS 1 TO 100 DEPENDING ON NUMBER-OF-COLUMNS.
-                   10 D-MATRIX-VALUE        PIC -ZZ9.
+                   OCCURS 1 TO 100 DEPENDING ON NUMBER-OF-COLUMNS.
+                   10 D-MATRIX-VALUE        PIC -ZZ9.99.
+
+
+
 
        WORKING-STORAGE SECTION.
            01 INDEX-ROW   PIC 999.
@@ -48,10 +54,10 @@
                        MOVE R-MATRIX-VALUE(INDEX-ROW, INDEX-COL)
                        TO D-MATRIX-VALUE(INDEX-COL)
 
-                       DISPLAY D-MATRIX-VALUE(INDEX-COL)
                    END-PERFORM
 
-                   DISPLAY 'Neue Zeile'
+                   MOVE X'0D0A' TO FILL
+
                    WRITE MATRIX
                    END-WRITE
            END-PERFORM

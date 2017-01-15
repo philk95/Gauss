@@ -139,6 +139,16 @@
                        COMPUTE R-MATRIX-VALUE(R-I-ROW,R-I-COL) =
                        R-MATRIX-VALUE(R-I-ROW,R-I-COL) /
                        R-MATRIX-VALUE(R-I-ROW,R-I-ROW)
+
+                   IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) > 0
+                       IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) < EPSILON
+                           MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
+                       END-IF
+                   ELSE
+                       IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) > EPSILON*-1
+                           MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
+                       END-IF
+                   END-IF
            END-PERFORM
        .
 

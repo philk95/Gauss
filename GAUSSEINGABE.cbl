@@ -62,16 +62,10 @@
                            DISPLAY "ERROR: NICHT GENUG SPEICHER"
                    WHEN NOT-SPARSE-MATRIX
                            DISPLAY "ERROR: KEINE DUENN BESETZTE MATRIX"
-                           DISPLAY "Elemente != 0: " NOT-ZERO-COUNTER
                    WHEN OTHER
                            DISPLAY "ERROR: UNBEKANNTER FEHLER"
                   END-EVALUATE
                ELSE
-
-                   DISPLAY 'E-Matrix: '
-                   PERFORM VARYING ROW FROM 1 BY 1 UNTIL ROW > MAX-ROWS
-                       DISPLAY E-MATRIX-ROW(ROW)
-                   END-PERFORM
 
                    PERFORM VARYING ROW
                            FROM 1 BY 1
@@ -101,8 +95,6 @@
            COMPUTE NUMBER-OF-ELEMENTS = NUMBER-OF-COLUMNS *
                                        (NUMBER-OF-COLUMNS - 1)
            COMPUTE MAX-NUMBER-OF-ELEMENTS = NUMBER-OF-ELEMENTS * 0.3
-
-           DISPLAY MAX-NUMBER-OF-ELEMENTS
 
            PERFORM SINGLE-PROCESSING.
        MAINRUN.

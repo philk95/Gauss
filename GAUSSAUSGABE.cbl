@@ -19,10 +19,11 @@
        FILE SECTION.
            FD MATRIX-ROW.
            01 MATRIX.
-               05 FILL         PIC XX VALUE X'0D0A'.
                05 D-MATRIX-ROW
-                   OCCURS 1 TO 100 DEPENDING ON NUMBER-OF-COLUMNS.
+                   OCCURS 100.
                    10 D-MATRIX-VALUE        PIC -ZZ9.99.
+               05 FILL         PIC XX VALUE X'0D0A'.
+
 
 
 

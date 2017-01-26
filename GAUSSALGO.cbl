@@ -187,7 +187,7 @@
        FIND-MAX-ELEMENT-IN-COLUMN.
            MOVE 0 TO TEMP-MAX
            PERFORM VARYING R-I-ROW
-                   FROM 1 BY 1
+                   FROM I-COLUMN BY 1
                    UNTIL R-I-ROW > MAX-ROWS
                    IF R-MATRIX-VALUE(R-I-ROW, I-COLUMN)  < 0
                       IF R-MATRIX-VALUE(R-I-ROW, I-COLUMN)*-1 > TEMP-MAX

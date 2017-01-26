@@ -66,7 +66,7 @@
            COMPUTE MAX-COLS = MAX-ROWS + 1
            MOVE MATRIX TO R-MATRIX
 
-           SET DEBUG-OFF TO TRUE
+           SET DEBUG-ON TO TRUE
 
            DISPLAY 'Ausgangs Matrix: '
            PERFORM PRINT
@@ -128,7 +128,7 @@
                    END-IF
            END-PERFORM
 
-           IF VALUE-NOT-ZERO-COUNTER > 1
+           IF VALUE-NOT-ZERO-COUNTER NOT EQUAL 1
                SET NOT-SOLVABLE TO TRUE
            END-IF
 
@@ -219,14 +219,16 @@
            .
 
        SWAP-ROWS.
-           IF DEBUG-ON
-               DISPLAY 'Vertausche Zeile ' INDEX-SWAPFIRST ' mit '
-                   INDEX-SWAPSECOND
+           IF TEMP-MAX NOT EQUAL 0
+               IF DEBUG-ON
+                   DISPLAY 'Vertausche Zeile ' INDEX-SWAPFIRST ' mit '
+                       INDEX-SWAPSECOND
+               END-IF
+               MOVE R-MATRIX-ROW(INDEX-SWAPFIRST)
+               TO   MATRIX-ROW-CHANGER
+               MOVE R-MATRIX-ROW(INDEX-SWAPSECOND)
+               TO   R-MATRIX-ROW(INDEX-SWAPFIRST)
+               MOVE MATRIX-ROW-CHANGER
+               TO   R-MATRIX-ROW(INDEX-SWAPSECOND)
            END-IF
-           MOVE R-MATRIX-ROW(INDEX-SWAPFIRST)
-           TO   MATRIX-ROW-CHANGER
-           MOVE R-MATRIX-ROW(INDEX-SWAPSECOND)
-           TO   R-MATRIX-ROW(INDEX-SWAPFIRST)
-           MOVE MATRIX-ROW-CHANGER
-           TO   R-MATRIX-ROW(INDEX-SWAPSECOND)
            .

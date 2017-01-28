@@ -63,7 +63,7 @@
            COMPUTE MAX-COLS = MAX-ROWS + 1
            MOVE MATRIX TO R-MATRIX
 
-           SET DEBUG-ON TO TRUE
+           SET DEBUG-OFF TO TRUE
 
            DISPLAY 'Ausgangs Matrix: '
            PERFORM PRINT
@@ -73,7 +73,9 @@
                     UNTIL I-COLUMN > MAX-COLS - 1
                     PERFORM FIND-MAX-ELEMENT-IN-COLUMN
 
+                    IF NOT NOT-SOLVABLE
                     MOVE TEMP-MAX TO PRINT-VALUE
+
                     IF DEBUG-ON
                     DISPLAY 'Maximun in Spalte ' I-COLUMN
                     ' betreagt ' PRINT-VALUE
@@ -96,7 +98,7 @@
                        DISPLAY ' '
                     END-IF
 
-
+                   END-IF
             END-PERFORM
 
             PERFORM DIVIDE-ROWS
@@ -199,6 +201,9 @@
                       MOVE R-I-ROW TO TEMP-MAX-INDEX
                    END-IF
            END-PERFORM
+           IF TEMP-MAX EQUAL 0
+               SET NOT-SOLVABLE TO TRUE
+           END-IF
            .
 
        PRINT.

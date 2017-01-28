@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="http://structorizer.fisch.lu/" version="3.26-01" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preForIn="foreach" stepFor="by" text="&#34;Eingabe&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;NichtNullZähler := 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Matrix := Datenstruktur für 2 Dimensionales Array anlegen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;FehlerGefunden := false&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;NichtDünnbesetzt := false&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;MaximaleReihen := 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Datei öffnen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;lesen einen Datensatz (Erster Datensatz gibt die Spaltenanzahl an)&#34;" comment="&#34;Erster Datensatz gibt die Spaltenanzahl an&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;AnzahlderReihen := AnzahlderSpalten-1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;AnzahlderElemente :=  AnzahlderSpalten * AnzahlderZeilen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;AnzahlZulässigerWerte := AnzahlderElemente * 0.3&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<call text="&#34;Einzelverarbeitung (Vorlauf)&#34;" comment="" color="ffffff" disabled="0"></call>
+		<while text="&#34;Solange kein Datei-End-of-File (Hauptlauf)&#34;" comment="" color="ffffff" disabled="0">
+			<qWhile>
+				<call text="&#34;Einzelverarbeitung&#34;" comment="" color="ffffff" disabled="0"></call>
+			</qWhile>
+		</while>
+		<instruction text="&#34;Datei schließen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<alternative text="&#34;Wenn FehlerGefunden&#34;" comment="" color="ffffff" disabled="0">
+			<qTrue>
+				<case text="&#34;Wenn true&#34;,&#34;Kein Speicherplatz vorhanden&#34;,&#34;Keine DünnbesetzteMatrix&#34;,&#34; &#34;" comment="" color="ffffff" disabled="0">
+					<qCase>
+						<instruction text="&#34;Gebe &#34;&#34;ERROR: NICHT GENUG SPEICHER&#34;&#34; aus&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<instruction text="&#34;gebe &#34;&#34;ERROR: KEINE DUENN BESETZTE MATRIX&#34;&#34; aus&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<instruction text="&#34;gebe &#34;&#34;ERROR: UNBEKANNTER FEHLER&#34;&#34; aus&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+				</case>
+			</qTrue>
+			<qFalse>
+				<while text="&#34;zähle Zeilenindex von 1 bis MaximaleReihen, Schrittweite 1&#34;" comment="" color="ffffff" disabled="0">
+					<qWhile>
+						<while text="&#34;zähle Spaltenindex von 1 bis (MaximaleReihen+1), Schrittweite 1&#34;" comment="" color="ffffff" disabled="0">
+							<qWhile>
+								<instruction text="&#34;Schreibe Matrix in AusgabeMatrix&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+							</qWhile>
+						</while>
+					</qWhile>
+				</while>
+				<call text="&#34;Call &#34;&#34;Gausalgo&#34;&#34; (AusgabeMatrix,MaximaleReihen)&#34;" comment="" color="ffffff" disabled="0"></call>
+			</qFalse>
+		</alternative>
+	</children>
+</root>

@@ -18,18 +18,18 @@
            01 MATRIX.
                05 D-MATRIX-ROW
                    OCCURS 100.
-                   10 D-MATRIX-VALUE        PIC -ZZ9.999.
-               05 FILL         PIC XX VALUE X'0D0A'.
+                   10 D-MATRIX-VALUE           PIC -ZZ9.999.
+               05 FILL                         PIC XX VALUE X'0D0A'.
 
 
        WORKING-STORAGE SECTION.
-           01 INDEX-ROW   PIC 999.
-           01 INDEX-COL   PIC 999.
-           01 MAX-ROWS    PIC 99.
+           01 INDEX-ROW                        PIC 999.
+           01 INDEX-COL                        PIC 999.
+           01 MAX-ROWS                         PIC 99.
        LINKAGE SECTION.
            01 R-MATRIX.
             COPY "MATRIX.CPY" REPLACING ==#== BY ==R==.
-           01 NUMBER-OF-COLUMNS                 PIC 99 COMP-3.
+           01 NUMBER-OF-COLUMNS                PIC 99 COMP-3.
 
        PROCEDURE DIVISION
            USING R-MATRIX, NUMBER-OF-COLUMNS.

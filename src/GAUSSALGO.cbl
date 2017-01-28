@@ -1,5 +1,5 @@
       ******************************************************************
-      * Author: Bjoern Luepschen
+      * Author: Philipp Kohl
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSALGO.
@@ -7,12 +7,12 @@
        FILE SECTION.
        WORKING-STORAGE SECTION.
 
-           01 MAX-COLS                         PIC 99 COMP-3.
+           01 MAX-COLS                             PIC 99 COMP-3.
            01 A-MATRIX.
                05 A-MATRIX-ROW OCCURS 100 INDEXED BY AR.
                   10 A-MATRIX-COL OCCURS 100 INDEXED BY AC.
-                       15 A-MATRIX-VALUE       PIC -ZZ9.9999.
-                       15 FILLER               PIC XX VALUE ' '.
+                       15 A-MATRIX-VALUE           PIC -ZZ9.9999.
+                       15 FILLER                   PIC XX VALUE ' '.
 
 
            01 R-MATRIX.
@@ -23,40 +23,40 @@
                 10 EX-MATRIX-VALUE PIC S999V9(10) COMP-3 OCCURS 1 TO 100
                 DEPENDING ON MAX-COLS.
 
-           01 EPSILON  PIC 9V9(8) COMP-3 VALUE 0.00000001.
+           01 EPSILON                PIC 9V9(8) COMP-3 VALUE 0.00000001.
 
-           01 I-COLUMN PIC 99 COMP-3.
-           01 TEMP-MAX PIC S999V9(10) COMP-3.
+           01 I-COLUMN               PIC 99 COMP-3.
+           01 TEMP-MAX               PIC S999V9(10) COMP-3.
 
-           01 MAX-ROW-INDEX PIC 99 COMP-3.
-           01 TEMP-MAX-INDEX PIC 99 COMP-3.
+           01 MAX-ROW-INDEX          PIC 99 COMP-3.
+           01 TEMP-MAX-INDEX         PIC 99 COMP-3.
 
-           01 INDEX-ROW PIC 99 COMP-3.
-           01 INDEX-COL PIC 99 COMP-3.
+           01 INDEX-ROW              PIC 99 COMP-3.
+           01 INDEX-COL              PIC 99 COMP-3.
 
-           01 INDEX-SWAPFIRST PIC 99 COMP-3.
-           01 INDEX-SWAPSECOND PIC 99 COMP-3.
+           01 INDEX-SWAPFIRST        PIC 99 COMP-3.
+           01 INDEX-SWAPSECOND       PIC 99 COMP-3.
 
-           01 SUBTRACT-ROW-FACTOR PIC S99V9(10) COMP-3.
-           01 DIVIDE-ROW-FACTOR PIC S99V9(10) COMP-3.
+           01 SUBTRACT-ROW-FACTOR    PIC S99V9(10) COMP-3.
+           01 DIVIDE-ROW-FACTOR      PIC S99V9(10) COMP-3.
 
-           01 PRINT-VALUE  PIC +999.99.
+           01 PRINT-VALUE            PIC +999.99.
 
            01 VALUE-NOT-ZERO-COUNTER PIC 9(10).
 
-           77 DEBUG            PIC 9.
-               88 DEBUG-ON     VALUE 0.
-               88 DEBUG-OFF    VALUE 1.
+           77 DEBUG                  PIC 9.
+               88 DEBUG-ON           VALUE 0.
+               88 DEBUG-OFF          VALUE 1.
 
-           77 RESULT-TYPE     PIC 9.
-               88 UNIQUE       VALUE 0.
-               88 NOT-SOLVABLE VALUE 1.
+           77 RESULT-TYPE            PIC 9.
+               88 UNIQUE             VALUE 0.
+               88 NOT-SOLVABLE       VALUE 1.
 
        LINKAGE SECTION.
            01 MATRIX.
               COPY "MATRIX.CPY" REPLACING ==#== BY ==E==.
 
-           01 MAX-ROWS                         PIC 99 COMP-3.
+           01 MAX-ROWS               PIC 99 COMP-3.
        PROCEDURE DIVISION
                    USING MATRIX, MAX-ROWS.
        MAIN-PROCEDURE.
@@ -141,11 +141,11 @@
 
                    IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) > 0
                        IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) < EPSILON
-                           MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
+                          MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
                        END-IF
                    ELSE
                        IF R-MATRIX-VALUE(R-I-ROW, R-I-COL) > EPSILON*-1
-                           MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
+                          MOVE 0 TO R-MATRIX-VALUE(R-I-ROW, R-I-COL)
                        END-IF
                    END-IF
            END-PERFORM
@@ -189,6 +189,7 @@
            PERFORM VARYING R-I-ROW
                    FROM I-COLUMN BY 1
                    UNTIL R-I-ROW > MAX-ROWS
+      *    Betragsmaessig groesstes Element
                    IF R-MATRIX-VALUE(R-I-ROW, I-COLUMN)  < 0
                       IF R-MATRIX-VALUE(R-I-ROW, I-COLUMN)*-1 > TEMP-MAX
                            COMPUTE TEMP-MAX =

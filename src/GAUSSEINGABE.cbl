@@ -1,5 +1,5 @@
       ******************************************************************
-      * Author: Philipp Kohl
+      * Author: Björn Lüpschen
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSEINGABE.
@@ -64,6 +64,7 @@
                   END-EVALUATE
                ELSE
 
+      *     Verschieben der Eingabe-Matrix in die Übergabe-Matrix
                    PERFORM VARYING ROW
                            FROM 1 BY 1
                            UNTIL ROW > MAX-ROWS
@@ -82,6 +83,7 @@
            OPEN INPUT FD-MATRIX
            MOVE SPACES TO INPUT-DATA-EOF
 
+      *    Lese Spaltenanzahl
            READ FD-MATRIX INTO D-N
                AT END MOVE "C" TO INPUT-DATA-EOF
            END-READ

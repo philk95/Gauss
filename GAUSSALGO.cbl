@@ -1,8 +1,5 @@
       ******************************************************************
-      * Author: Björn Lüpschen und Philipp Kohl
-      * Date:
-      * Purpose:
-      * Tectonics: cobc
+      * Author: Bjoern Luepschen
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSALGO.
@@ -155,7 +152,8 @@
        SUBTRACT-ROWS.
            PERFORM VARYING R-I-ROW FROM 1 BY 1 UNTIL R-I-ROW > MAX-ROWS
 
-           IF R-I-ROW NOT EQUAL I-COLUMN
+           IF R-I-ROW NOT EQUAL I-COLUMN AND
+              R-MATRIX-VALUE(R-I-ROW, I-COLUMN) NOT EQUAL 0
                COMPUTE SUBTRACT-ROW-FACTOR =
                        R-MATRIX-VALUE(R-I-ROW, I-COLUMN)
                        / R-MATRIX-VALUE(I-COLUMN, I-COLUMN)

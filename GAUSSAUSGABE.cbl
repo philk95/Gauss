@@ -1,8 +1,5 @@
       ******************************************************************
-      * Author:
-      * Date:
-      * Purpose:
-      * Tectonics: cobc
+      * Author: Bjoern Luepschen
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSAUSGABE.
@@ -21,11 +18,8 @@
            01 MATRIX.
                05 D-MATRIX-ROW
                    OCCURS 100.
-                   10 D-MATRIX-VALUE        PIC -ZZ9.99.
+                   10 D-MATRIX-VALUE        PIC -ZZ9.999.
                05 FILL         PIC XX VALUE X'0D0A'.
-
-
-
 
 
        WORKING-STORAGE SECTION.

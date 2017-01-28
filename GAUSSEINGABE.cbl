@@ -1,8 +1,5 @@
       ******************************************************************
-      * Author:
-      * Date:
-      * Purpose:
-      * Tectonics: cobc
+      * Author: Philipp Kohl
       ******************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. GAUSSEINGABE.
@@ -92,8 +89,8 @@
            MOVE D-N TO NUMBER-OF-COLUMNS
 
            COMPUTE NUMBER-OF-ROWS = NUMBER-OF-COLUMNS - 1
-           COMPUTE NUMBER-OF-ELEMENTS = NUMBER-OF-COLUMNS *
-                                       (NUMBER-OF-COLUMNS - 1)
+           COMPUTE NUMBER-OF-ELEMENTS =
+                   NUMBER-OF-COLUMNS * NUMBER-OF-ROWS
            COMPUTE MAX-NUMBER-OF-ELEMENTS = NUMBER-OF-ELEMENTS * 0.3
 
            PERFORM SINGLE-PROCESSING.

@@ -65,8 +65,10 @@
 
            SET DEBUG-OFF TO TRUE
 
-           DISPLAY 'Ausgangs Matrix: '
-           PERFORM PRINT
+           IF DEBUG-ON
+               DISPLAY 'Ausgangs Matrix: '
+               PERFORM PRINT
+           END-IF
 
             PERFORM VARYING I-COLUMN
                     FROM 1 BY 1
@@ -102,8 +104,11 @@
             END-PERFORM
 
             PERFORM DIVIDE-ROWS
-            DISPLAY 'Ergebnis:'
-            PERFORM PRINT
+
+            IF DEBUG-ON
+               DISPLAY 'Ergebnis:'
+               PERFORM PRINT
+            END-IF
 
             PERFORM INTERPRET-RESULT
 

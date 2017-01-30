@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root xmlns:nsd="http://structorizer.fisch.lu/" version="3.26-01" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preForIn="foreach" stepFor="by" text="&#34;Gaußsches Eliminationsverfahren&#34;" comment="" color="ffffff" type="program" style="nice">
 	<children>
+		<instruction text="&#34;AnzahlZeilen := wird aus der Eingabe entgegengenommen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;AnzahlSpalten := AnzahlZeilen + 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;PivotZeile := 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
 		<instruction text="&#34;EPSILON := 0,00000001&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
-		<while text="&#34;zähle Spaltenindex von 1 bis (Anzahl Spalten-1), Schrittweite 1&#34;" comment="" color="ffffff" disabled="0">
+		<while text="&#34;zähle Spaltenindex von 1 bis (AnzahlSpalten - 1), Schrittweite 1&#34;" comment="" color="ffffff" disabled="0">
 			<qWhile>
-				<call text="&#34;PivotElement:= Suche Maximum in aktueller Spalte &#34;" comment="" color="ffffff" disabled="0"></call>
-				<instruction text="&#34;Tausche Spaltenindex-Zeile mit Zeile, in der das PivotElement steht&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<call text="&#34;PivotZeile = Suche Maximum in aktueller Spalte &#34;" comment="" color="ffffff" disabled="0"></call>
+				<instruction text="&#34;Tausche Spaltenindex-Zeile mit PivotZeile&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
 				<while text="&#34;zähle Zeilenindex von 1 bis (Anzahl Zeilen), Schrittweite 1&#34;" comment="" color="ffffff" disabled="0">
 					<qWhile>
 						<alternative text="&#34;Wenn Zeilenindex ungleich Spaltenindex&#34;,&#34;UND MatrixElement von Zeilenindex und Spaltenindex ungleich 0&#34;" comment="" color="ffffff" disabled="0">
@@ -38,7 +41,7 @@
 						<instruction text="&#34;MatrixElement von (Zeilenindex und Spaltenindex)= MatrixElement von (Zeilenindex und Spaltenindex) / MatrixElement von (Zeilenindex und Zeilenindex)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
 						<alternative text="&#34;|MatrixElement von (Zeilenindex und Spaltenindex)| &#60; EPSILON &#34;" comment="" color="ffffff" disabled="0">
 							<qTrue>
-								<instruction text="&#34;MatrixElement von (Zeilenindex und TempSpaltenindex) = 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;MatrixElement von (Zeilenindex und TempSpaltenindex) = 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
 							</qTrue>
 							<qFalse color="ffffff">
 							</qFalse>
